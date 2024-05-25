@@ -42,16 +42,6 @@ const cardsDiscountsData = [
       subtitle: "Stock up on essentials with our exclusive discounts",
       avatarUrl: "https://example.com/images/groceries.png"
     },
-    {
-        title: "Limited Time Offer on Groceries",
-        subtitle: "Stock up on essentials with our exclusive discounts",
-        avatarUrl: "https://example.com/images/groceries.png"
-      },
-      {
-          title: "Limited Time Offer on Groceries",
-          subtitle: "Stock up on essentials with our exclusive discounts",
-          avatarUrl: "https://example.com/images/groceries.png"
-      }
   ];
 
 export default function Discount({cardsDiscounts=cardsDiscountsData, navigation }){
@@ -60,7 +50,7 @@ export default function Discount({cardsDiscounts=cardsDiscountsData, navigation 
     <View style={{display:"flex", margin:"auto", padding:8}}>
         <ScrollView showsVerticalScrollIndicator={false}>
             {cardsDiscounts.map(card => (
-                <TouchableOpacity onPress={()=>{navigation.navigate("Details", {card: card})}}>
+                <TouchableOpacity key={card.title} onPress={()=>{navigation.navigate("Details", {card: card})}}>
                     <Card.Title
                         title={card.title}
                         subtitle={card.subtitle}
