@@ -1,9 +1,18 @@
-class Card {
-  constructor(title, subtitle, avatarUrl) {
-    this.title = title;
-    this.subtitle = subtitle;
-    this.avatarUrl = avatarUrl || null;
-  }
-}
+import { DataTypes } from 'sequelize';
+import sequelize from '../config/sequelize.config.js';
 
-export default Card;
+export const Card = sequelize.define('Card', {
+  title: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  subtitle: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  avatarUrl: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+});
+

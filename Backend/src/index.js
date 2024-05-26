@@ -1,4 +1,5 @@
 import express from 'express';
+import sequelize from './config/sequelize.config.js';
 import cardRoutes from './routes/cardRoutes.js';
 
 const app = express();
@@ -11,6 +12,11 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+// Sincronize os modelos com o banco de dados
+sequelize.sync().then(() => {
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
+}).catch(error => {
+  console.error('Unable to connect to the database:', error);
 });
