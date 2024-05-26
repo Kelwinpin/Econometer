@@ -1,18 +1,9 @@
-import mongoose from 'mongoose';
-
-const cardSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true
-  },
-  subtitle: {
-    type: String,
-    required: true
-  },
-  avatarUrl: {
-    type: String
+class Card {
+  constructor(title, subtitle, avatarUrl) {
+    this.title = title;
+    this.subtitle = subtitle;
+    this.avatarUrl = avatarUrl || null;
   }
-});
+}
 
-const Card = mongoose.model('Card', cardSchema);
 export default Card;
