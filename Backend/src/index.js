@@ -1,12 +1,14 @@
 import express from 'express';
 import sequelize from './config/sequelize.config.js';
 import cardRoutes from './routes/cardRoutes.js';
+import userRoutes from './routes/usersRoutes.js' 
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use('/api/cards', cardRoutes);
+app.use('/users', userRoutes);
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
