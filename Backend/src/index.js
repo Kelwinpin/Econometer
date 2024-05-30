@@ -4,6 +4,7 @@ import cardRoutes from './routes/cardRoutes.js';
 import userRoutes from './routes/usersRoutes.js' 
 import establishmentRoutes from './routes/establishmentRoutes.js';
 import discountPatternRoutes from './routes/discountPatternRoutes.js';
+import discountRequestRoutes from './routes/discountRequestRoutes.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -13,6 +14,7 @@ app.use('/api/cards', cardRoutes);
 app.use('/users', userRoutes);
 app.use('/establishment', establishmentRoutes)
 app.use('/discount-patterns', discountPatternRoutes);
+app.use('/discount-request', discountRequestRoutes)
 
 app.use((err, req, res, next) => {
   console.error(err.stack);

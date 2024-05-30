@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../config/sequelize.config.js';
-import Users from './users';
-import Establishment from './establishment';
+import {Users} from './users.js';
+import {Establishment} from './establishment.js';
 
 const DiscountRequest = sequelize.define('DiscountRequest', {
     id: {
