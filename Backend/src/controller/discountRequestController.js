@@ -96,6 +96,34 @@ const DiscountRequestController = {
             console.error(error);
             res.status(500).json({ message: 'Internal server error' });
         }
+    },
+
+    async getByUserId(req, res) {
+        const { user_id } = req.params;
+
+        try {
+            const discountRequests = await DiscountRequest.findAll({
+                where: { user_id }
+            });
+            res.json(discountRequests);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Internal server error' });
+        }
+    },
+
+    async getByEstablishmentId(req, res) {
+        const { establishment_id } = req.params;
+
+        try {
+            const discountRequests = await DiscountRequest.findAll({
+                where: { establishment_id }
+            });
+            res.json(discountRequests);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Internal server error' });
+        }
     }
 };
 
