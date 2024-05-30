@@ -8,13 +8,15 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use('/api/cards', cardRoutes);
-app.use('/users', userRoutes);
+app.use('/', userRoutes);
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ message: 'Internal server error' });
 });
 
-// Sincronize os modelos com o banco de dados
+
 sequelize.sync().then(() => {
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

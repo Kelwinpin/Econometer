@@ -10,7 +10,7 @@ userRoutes.get('/users', UsersController.getAll);
 userRoutes.get('/users/:cpf', UsersController.getByCPF);
 
 // Rota para criar um novo usuário
-userRoutes.post('/users/', UsersController.create);
+userRoutes.post('/users', UsersController.create);
 
 // Rota para atualizar um usuário existente
 userRoutes.put('/users/:cpf', UsersController.update);
