@@ -3,6 +3,7 @@ import sequelize from './config/sequelize.config.js';
 import cardRoutes from './routes/cardRoutes.js';
 import userRoutes from './routes/usersRoutes.js' 
 import establishmentRoutes from './routes/establishmentRoutes.js';
+import discountPatternRoutes from './routes/discountPatternRoutes.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -11,6 +12,7 @@ app.use(express.json());
 app.use('/api/cards', cardRoutes);
 app.use('/users', userRoutes);
 app.use('/establishment', establishmentRoutes)
+app.use('/discount-patterns', discountPatternRoutes);
 
 app.use((err, req, res, next) => {
   console.error(err.stack);

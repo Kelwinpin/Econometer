@@ -1,6 +1,6 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../config/sequelize.config.js';
-import Establishment from './establishment'; // Importe o modelo Establishment
+import {Establishment} from './establishment.js';
 
 const DiscountPattern = sequelize.define('DiscountPattern', {
     id: {
@@ -26,10 +26,14 @@ const DiscountPattern = sequelize.define('DiscountPattern', {
     },
     establishment_id: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: {
+            model: 'establishment',
+            key: 'id'
+        }
     }
 }, {
-    tableName: 'discount_pattern',
+    tableName: 'discount_patterns',
     timestamps: false
 });
 

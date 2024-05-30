@@ -13,7 +13,7 @@ const EstablishmentController = {
     },
 
     async getById(req, res) {
-        const { id, name } = req.params;
+        const { id } = req.params;
         
         try {
             const establishment =  await Establishment.findOne({where: { id }}) 
