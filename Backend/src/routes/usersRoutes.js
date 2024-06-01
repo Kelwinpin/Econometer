@@ -3,14 +3,14 @@ import UsersController from '../controller/usersController.js';
 
 const userRoutes = express.Router();
 
-userRoutes.get('/users', UsersController.getAll);
+userRoutes.get('/', UsersController.getAll);
 
-userRoutes.get('/users/:cpf', UsersController.getByCPF);
+userRoutes.get('/:cpf', UsersController.getByCPF);
 
-userRoutes.post('/users', UsersController.create);
+userRoutes.post('/', UsersController.create);
 
-userRoutes.put('/users/:cpf', UsersController.update);
+userRoutes.put('/:cpf', UsersController.update);
 
-userRoutes.delete('/users/:cpf', UsersController.delete);
+userRoutes.delete('/:cpf', UsersController.delete);
 
 export default userRoutes;
