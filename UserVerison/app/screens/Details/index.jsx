@@ -1,16 +1,24 @@
 import { View, Text, StyleSheet } from "react-native";
 import { colors } from "../../utils";
 import { TouchableOpacity } from "react-native";
+import { useState } from "react";
+import { client } from "../../utils/instance/axiosInstance";
 
 export default function DetailsScreen({route, navigation}){
     const {card} = route.params;
+    const [user, setUser] = useState({});
+
+    const getUser = async () => {
+      const res = await client.get("users/15736958660")
+      setUser(res.data);
+    }
 
     return(
         <View style={styles.container}>
             <Text style={styles.title}>{card?.title.toUpperCase()}</Text>
             <Text style={styles.subTitle}>{card?.subtitle}</Text>
-            <TouchableOpacity style = {styles.button} onPress={() => console.log("Gerar codigo")}>
-                <Text style = {styles.text}>Pegar Desconto</Text>
+            <TouchableOpacity style = {styles.button} onPress={() => getUser()}>
+                <Text style = {styles.text}>{user.name}</Text>
             </TouchableOpacity>
         </View>
   );
