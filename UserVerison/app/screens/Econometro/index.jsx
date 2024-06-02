@@ -1,8 +1,25 @@
 import { View, StyleSheet, Text } from "react-native";
 import { colors } from "../../utils";
 import IconNative from "../../components/Icon";
+import { useEffect, useState } from "react";
+import { client } from "../../utils/instance/axiosInstance";
 
 export default function Econometro(){
+    const [moneySafed, setMoneySafed] = useState(0);
+
+    const economyData = async () => {
+        try {
+            const {data} = await client.get(`/discount-request/15736958660/`);
+            setMoneySafed(data.totalSafed)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(()=>{
+        economyData()
+    },[])
+
     return(
         <View style={styles.container}>
             <Text style = {styles.text}>
@@ -10,7 +27,7 @@ export default function Econometro(){
             </Text>
             <IconNative name={"money-bill-wave"} size={128}/>
             <Text style = {styles.moneyValue}>
-                $200,00
+                ${parseFloat(moneySafed)}
             </Text>
         </View>
     )

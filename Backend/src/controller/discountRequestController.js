@@ -124,7 +124,32 @@ const DiscountRequestController = {
             console.error(error);
             res.status(500).json({ message: 'Internal server error' });
         }
-    }
+    },
+
+    async getSafeMoney(req, res) {
+        const { user_id } = req.params;
+
+        try {
+            const discountRequest = await DiscountRequest.findAll({
+                where: {
+                    user_id,
+                    status: "approved"
+                }
+            });
+            if (discountRequest) {
+                let total = 0
+                discountRequest.map((request) => {
+                    total+=request.discount_value
+                })
+                res.json({totalSafed: total})
+            } else {
+                res.status(404).json({ message: 'Discount request not found' });
+            }
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Internal server error' });
+        }
+    },
 };
 
 export default DiscountRequestController;

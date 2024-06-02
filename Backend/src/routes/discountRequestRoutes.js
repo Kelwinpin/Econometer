@@ -11,6 +11,8 @@ discountRequestRoutes.get('/user/:user_id', DiscountRequestController.getByUserI
 
 discountRequestRoutes.get('/establishment/:establishment_id', DiscountRequestController.getByEstablishmentId)
 
+discountRequestRoutes.get('/:user_id', DiscountRequestController.getSafeMoney)
+
 discountRequestRoutes.put('/:establishment_id/:user_id/:request_id', DiscountRequestController.update);
 
 discountRequestRoutes.delete('/:establishment_id/:user_id/:request_id', DiscountRequestController.delete);
