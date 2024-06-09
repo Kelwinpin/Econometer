@@ -4,17 +4,18 @@ const DiscountRequestController = {
     async create(req, res) {
         const user_id = parseInt(req.params.user_id);
         const establishment_id = parseInt(req.params.establishment_id)
-        const { validity, discount_value, purchase_value, status, validation_date } = req.body;
+        const discount_pattern_id = parseInt(req.params.discount_pattern_id)
+        const { validity, purchase_value, status, validation_date } = req.body;
 
         try {
             const newDiscountRequest = await DiscountRequest.create({
                 validity,
-                discount_value,
                 purchase_value,
                 status,
                 validation_date,
                 user_id,
-                establishment_id
+                establishment_id,
+                discount_pattern_id
             });
             res.status(201).json(newDiscountRequest);
         } catch (error) {
@@ -104,6 +105,20 @@ const DiscountRequestController = {
         try {
             const discountRequests = await DiscountRequest.findAll({
                 where: { user_id }
+            });
+            res.json(discountRequests);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Internal server error' });
+        }
+    },
+
+    async getByDiscountPatternId(req, res) {
+        const { discount_pattern_id } = req.params;
+
+        try {
+            const discountRequests = await DiscountRequest.findAll({
+                where: { discount_pattern_id }
             });
             res.json(discountRequests);
         } catch (error) {

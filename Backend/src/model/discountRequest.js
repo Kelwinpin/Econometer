@@ -2,6 +2,7 @@ import { DataTypes } from 'sequelize';
 import sequelize from '../config/sequelize.config.js';
 import {Users} from './users.js';
 import {Establishment} from './establishment.js';
+import DiscountPattern from './discountPattern.js';
 
 const DiscountRequest = sequelize.define('DiscountRequest', {
     id: {
@@ -11,10 +12,6 @@ const DiscountRequest = sequelize.define('DiscountRequest', {
     },
     validity: {
         type: DataTypes.DATE,
-        allowNull: false
-    },
-    discount_value: {
-        type: DataTypes.DECIMAL(5, 2),
         allowNull: false
     },
     purchase_value: {
@@ -35,7 +32,11 @@ const DiscountRequest = sequelize.define('DiscountRequest', {
     establishment_id: {
         type: DataTypes.INTEGER,
         allowNull: false
-    }
+    },
+    discount_pattern_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
 }, {
     tableName: 'discount_request',
     timestamps: false
@@ -43,5 +44,6 @@ const DiscountRequest = sequelize.define('DiscountRequest', {
 
 DiscountRequest.belongsTo(Users, { foreignKey: 'user_id', targetKey: 'cpf' });
 DiscountRequest.belongsTo(Establishment, { foreignKey: 'establishment_id', targetKey: 'id' });
+DiscountRequest.belongsTo(DiscountPattern, { foreignKey: 'discount_pattern_id', targetKey: 'id' });
 
 export default DiscountRequest;

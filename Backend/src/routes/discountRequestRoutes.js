@@ -3,7 +3,7 @@ import DiscountRequestController from '../controller/discountRequestController.j
 
 const discountRequestRoutes = express.Router();
 
-discountRequestRoutes.post('/:establishment_id/:user_id/', DiscountRequestController.create);
+discountRequestRoutes.post('/:establishment_id/:discount_pattern_id/:user_id/', DiscountRequestController.create);
 
 discountRequestRoutes.get('/:establishment_id/:user_id/:request_id', DiscountRequestController.getById);
 
@@ -11,7 +11,7 @@ discountRequestRoutes.get('/user/:user_id', DiscountRequestController.getByUserI
 
 discountRequestRoutes.get('/establishment/:establishment_id', DiscountRequestController.getByEstablishmentId)
 
-discountRequestRoutes.get('/:user_id', DiscountRequestController.getSafeMoney)
+discountRequestRoutes.get('safeMoney/:user_id', DiscountRequestController.getSafeMoney)
 
 discountRequestRoutes.put('/:establishment_id/:user_id/:request_id', DiscountRequestController.update);
 
