@@ -1,3 +1,4 @@
+// models/discountRequest.js
 import { DataTypes } from 'sequelize';
 import sequelize from '../config/sequelize.config.js';
 import {Users} from './users.js';
@@ -36,14 +37,16 @@ const DiscountRequest = sequelize.define('DiscountRequest', {
     discount_pattern_id: {
         type: DataTypes.INTEGER,
         allowNull: false
-    },
+    }
 }, {
-    tableName: 'discount_request',
+    tableName: 'discount_requests',
     timestamps: false
 });
 
-DiscountRequest.belongsTo(Users, { foreignKey: 'user_id', targetKey: 'cpf' });
-DiscountRequest.belongsTo(Establishment, { foreignKey: 'establishment_id', targetKey: 'id' });
+DiscountRequest.belongsTo(Users, { foreignKey: 'user_id', targetKey: 'cpf', as: 'user' });
+DiscountRequest.belongsTo(Establishment, { foreignKey: 'establishment_id', targetKey: 'id', as: 'establishment' });
 DiscountRequest.belongsTo(DiscountPattern, { foreignKey: 'discount_pattern_id', targetKey: 'id' });
 
+Users.hasOne(DiscountRequest, { foreignKey: 'user_id', as: 'discountRequests' });
+Establishment.hasOne(DiscountRequest, { foreignKey: 'establishment_id', as: 'discountRequests' });
 export default DiscountRequest;

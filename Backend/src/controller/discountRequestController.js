@@ -1,4 +1,7 @@
 import DiscountRequest from '../model/discountRequest.js';
+import { Users } from '../model/users.js';
+import { Establishment } from '../model/establishment.js';
+import DiscountPattern from '../model/discountPattern.js';
 
 const DiscountRequestController = {
     async create(req, res) {
@@ -26,17 +29,31 @@ const DiscountRequestController = {
 
     async getById(req, res) {
         const { establishment_id, user_id, request_id } = req.params;
-
+    
         try {
             const discountRequest = await DiscountRequest.findOne({
                 where: {
                     id: request_id,
                     user_id,
                     establishment_id
-                }
+                },
+                include: [
+                    {
+                        model: Users,
+                        as: 'user',
+                        attributes: ['name']
+                    },
+                    {
+                        model: Establishment,
+                        as: 'establishment',
+                        attributes: ['name']
+                    },
+                ]
             });
+    
             if (discountRequest) {
-                res.json(discountRequest);
+                const result = discountRequest;
+                res.json(result);
             } else {
                 res.status(404).json({ message: 'Discount request not found' });
             }
